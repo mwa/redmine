@@ -7,11 +7,7 @@
 <h2><%=l(:label_project_plural)%></h2>
 
 <% @project_tree.keys.sort.each do |project| %>
-<h3><% if project.wiki %>
-  <%= link_to h(project.name), {:controller => 'wiki', :action => 'index', :id => project}, :class => (User.current.member_of?(project) ? "icon icon-fav" : "") %>
-<% else %>
-  <%= link_to h(project.name), {:action => 'show', :id => project}, :class => (User.current.member_of?(project) ? "icon icon-fav" : "") %>
-<% end %></h3>
+<h3><%= link_to h(project.name), {:action => 'show', :id => project, :jump => (project.wiki ? 'wiki' : nil)}, :class => (User.current.member_of?(project) ? "icon icon-fav" : "") %></h3>
 <%= textilizable(project.short_description, :project => project) %>
 
 <% if @project_tree[project].any? %>
